@@ -1,4 +1,7 @@
 *.iml
 .idea/
+src
 dist/test
 *.map
+.gitignore
+env.sh
