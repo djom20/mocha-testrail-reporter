@@ -30,7 +30,7 @@ mocha --opts mocha-testrail.opts build/test
 
 
 Mark your mocha test names with ID of Testrail test cases. Ensure that your case ids are well distinct from test descriptions.
- 
+
 ```Javascript
 it("C123 C124 Authenticate with invalid user", . . .
 it("Authenticate a valid user C321", . . .
@@ -45,6 +45,8 @@ Only passed or failed tests will be published. Skipped or pending tests will not
 **username**: *string* user under which the test run will be created (e.g. jenkins or ci)
 
 **password**: *string* password or API token for user
+
+**suiteName**: *string* name of the suite into the plan
 
 **projectId**: *number* projet number with which the tests are associated
 

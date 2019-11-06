@@ -70,7 +70,7 @@ export class TestRail {
             }
         }
 
-        let req = this._get(`get_cases/${this.options.projectId}&suite_id=${this.options.suiteId}${filter}`, (body) => {
+        this._get(`get_cases/${this.options.projectId}&suite_id=${this.options.suiteId}${filter}`, (body) => {
             if (callback) {
                 callback(body);
             }
@@ -84,26 +84,35 @@ export class TestRail {
      * @param {TestRailResult[]} results
      * @param {Function} callback
      */
-    public publish(name: string, description: string, results: TestRailResult[], callback?: Function): void {
+    public publish(results: TestRailResult[], callback?: Function): void {
         console.log(`Publishing ${results.length} test result(s) to ${this.base}`);
 
-        this._post(`add_run/${this.options.projectId}`, {
-            "suite_id": this.options.suiteId,
-            "name": name,
-            "description": description,
-            "assignedto_id": this.options.assignedToId,
-            "include_all": true
-        }, (body) => {
-            const runId = body.id
-            console.log(`Results published to ${this.base}?/runs/view/${runId}`)
-            this._post(`add_results_for_cases/${runId}`, {
-                results: results
-            }, (body) => {
-                // execute callback if specified
-                if (callback) {
-                    callback();
-                }
+        this._get(`get_plans/${this.options.projectId}&is_completed=0`, (resp) => {
+            if (resp.error) throw new Error(resp.error)
+
+            this._get(`get_plan/${resp.body[0].id}&is_completed=0`, (resp) => {
+                if (resp.error) throw new Error(resp.error)
+
+                let run = resp.body.entries
+                    .filter(e => e.name.includes(this.options.suiteName))
+                    .reduce((obj, e) => {
+                        return e.runs.filter(r => {
+                            if (r.name.includes(this.options.suiteName)) {
+                                obj = r
+                                return obj
+                            }
+                        })
+                    }, {})
+
+                this._post(`add_results_for_cases/${run[0].id}`, {
+                    results: results
+                }, (body) => {
+                    // execute callback if specified
+                    if (callback) {
+                        callback();
+                    }
+                })
             })
-        });
+        })
     }
 }
