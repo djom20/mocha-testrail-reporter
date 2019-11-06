@@ -31,7 +31,8 @@
   },
   "dependencies": {
     "btoa": "^1.1.2",
-    "unirest": "^0.5.1"
+    "unirest": "^0.5.1",
+    "@types/node": "^6.0.58"
   },
   "peerDependencies": {
     "mocha": "^3 || ^2.2.5"
@@ -39,7 +40,6 @@
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.36",
-    "@types/node": "^6.0.58",
     "chai": "^3.5.0",
     "rimraf": "^2.5.4",
     "typescript": "^2.1.4"
