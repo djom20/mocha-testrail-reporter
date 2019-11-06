@@ -60,7 +60,7 @@ export class TestRail {
      * @param {{[p: string]: number[]}} filters
      * @param {Function} callback
      */
-    public fetchCases(filters?: { [key: string]: number[] }, callback?: Function): void {
+    public fetchCases(suiteId: string, filters?: { [key: string]: number[] }, callback?: Function): void {
         let filter = "";
         if(filters) {
             for (var key in filters) {
@@ -70,7 +70,7 @@ export class TestRail {
             }
         }
 
-        this._get(`get_cases/${this.options.projectId}&suite_id=${this.options.suiteId}${filter}`, (body) => {
+        this._get(`get_cases/${this.options.projectId}&suite_id=${suiteId}${filter}`, (body) => {
             if (callback) {
                 callback(body);
             }

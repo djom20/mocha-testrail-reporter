@@ -3,9 +3,7 @@ export interface TestRailOptions {
     username: string,
     password: string,
     suiteName: string,
-    projectId: number,
-    suiteId: number,
-    assignedToId?: number,
+    projectId: string
 }
 
 export enum Status {
