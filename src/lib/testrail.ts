@@ -9,7 +9,7 @@ export class TestRail {
 
     constructor(private options: TestRailOptions) {
         // compute base url
-        this.base = `https://${options.domain}/index.php`;
+        this.base = `${options.domain}/index.php`;
     }
 
     private _post(api: String, body: any, callback: Function, error?: Function) {
@@ -108,6 +108,8 @@ export class TestRail {
                     results: results
                 }, (body) => {
                     // execute callback if specified
+
+                    console.log('Cases published:', results)
                     if (callback) {
                         callback();
                     }

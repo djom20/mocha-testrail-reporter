@@ -8,7 +8,7 @@ var TestRail = /** @class */ (function () {
     function TestRail(options) {
         this.options = options;
         // compute base url
-        this.base = "https://" + options.domain + "/index.php";
+        this.base = options.domain + "/index.php";
     }
     TestRail.prototype._post = function (api, body, callback, error) {
         var req = request("POST", this.base)
