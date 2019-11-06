@@ -2,6 +2,7 @@ export interface TestRailOptions {
     domain: string,
     username: string,
     password: string,
+    suiteName: string,
     projectId: number,
     suiteId: number,
     assignedToId?: number,
