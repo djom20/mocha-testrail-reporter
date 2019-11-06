@@ -9,6 +9,12 @@ export class MochaTestRailReporter extends reporters.Spec {
     constructor(runner: any) {
         super(runner);
 
+        console.log('domain', process.env.TESTRAILS_HOST);
+        console.log('username', process.env.TESTRAILS_USERNAME);
+        console.log('password', process.env.TESTRAILS_PASSWORD);
+        console.log('projectId', process.env.TESTRAILS_PROJECTID);
+        console.log('suiteName', process.env.TESTRAILS_UNIT_SUITENAME);
+
         let reporterOptions: TestRailOptions = <TestRailOptions>{
             domain: process.env.TESTRAILS_HOST,
             username: process.env.TESTRAILS_USERNAME,

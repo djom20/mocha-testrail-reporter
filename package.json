@@ -1,6 +1,6 @@
 {
   "name": "mocha-testrail-reporter",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A Testrail reporter for mocha including TestRail API basic library",
   "main": "index.js",
   "private": false,
@@ -26,7 +26,8 @@
     "tsc": "tsc",
     "clean": "rimraf dist",
     "test": "mocha dist/test",
-    "build": "npm run clean && npm run tsc"
+    "build": "npm run clean && npm run tsc",
+    "postinstall": "npm run build && rimraf src"
   },
   "dependencies": {
     "btoa": "^1.1.2",
