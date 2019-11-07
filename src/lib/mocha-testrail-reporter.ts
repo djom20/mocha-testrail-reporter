@@ -74,7 +74,9 @@ export class MochaTestRailReporter extends reporters.Spec {
             if (this.results.length == 0) {
                 console.warn("No testcases were matched. Ensure that your tests are declared correctly and matches TCxxx");
             }
-            new TestRail(reporterOptions).publish(this.results);
+            new TestRail(reporterOptions).publish(this.results, () => {
+                console.log('Finished')
+            });
         });
     }
 

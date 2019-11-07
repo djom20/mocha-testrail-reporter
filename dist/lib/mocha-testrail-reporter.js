@@ -79,7 +79,9 @@ var MochaTestRailReporter = /** @class */ (function (_super) {
             if (_this.results.length == 0) {
                 console.warn("No testcases were matched. Ensure that your tests are declared correctly and matches TCxxx");
             }
-            new testrail_1.TestRail(reporterOptions).publish(_this.results);
+            new testrail_1.TestRail(reporterOptions).publish(_this.results, function () {
+                console.log('Finished');
+            });
         });
         return _this;
     }
