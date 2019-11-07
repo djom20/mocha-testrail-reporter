@@ -83,13 +83,13 @@ var TestRail = /** @class */ (function () {
     TestRail.prototype.publish = function (results, callback) {
         var _this = this;
         console.log("Publishing " + results.length + " test result(s) to " + this.base);
-        this._get("get_plans/" + this.options.projectId + "&is_completed=0", function (resp) {
-            if (resp.error)
-                throw new Error(resp.error);
-            _this._get("get_plan/" + resp.body[0].id + "&is_completed=0", function (resp) {
-                if (resp.error)
-                    throw new Error(resp.error);
-                var run = resp.body.entries
+        this._get("get_plans/" + this.options.projectId + "&is_completed=0", function (plans) {
+            if (plans.error)
+                throw new Error(plans.error);
+            _this._get("get_plan/" + plans[0].id + "&is_completed=0", function (plan) {
+                if (plan.error)
+                    throw new Error(plan.error);
+                var run = plan.entries
                     .filter(function (e) { return e.name.includes(_this.options.suiteName); })
                     .reduce(function (obj, e) {
                     return e.runs.filter(function (r) {
@@ -103,6 +103,7 @@ var TestRail = /** @class */ (function () {
                     results: results
                 }, function (body) {
                     // execute callback if specified
+                    console.log('Cases published:', results);
                     if (callback) {
                         callback();
                     }

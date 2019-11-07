@@ -87,13 +87,13 @@ export class TestRail {
     public publish(results: TestRailResult[], callback?: Function): void {
         console.log(`Publishing ${results.length} test result(s) to ${this.base}`);
 
-        this._get(`get_plans/${this.options.projectId}&is_completed=0`, (resp) => {
-            if (resp.error) throw new Error(resp.error)
+        this._get(`get_plans/${this.options.projectId}&is_completed=0`, (plans) => {
+            if (plans.error) throw new Error(plans.error)
 
-            this._get(`get_plan/${resp.body[0].id}&is_completed=0`, (resp) => {
-                if (resp.error) throw new Error(resp.error)
+            this._get(`get_plan/${plans[0].id}&is_completed=0`, (plan) => {
+                if (plan.error) throw new Error(plan.error)
 
-                let run = resp.body.entries
+                let run = plan.entries
                     .filter(e => e.name.includes(this.options.suiteName))
                     .reduce((obj, e) => {
                         return e.runs.filter(r => {
