@@ -19,11 +19,6 @@ var MochaTestRailReporter = /** @class */ (function (_super) {
     function MochaTestRailReporter(runner) {
         var _this = _super.call(this, runner) || this;
         _this.results = [];
-        console.log('domain', process.env.TESTRAILS_HOST);
-        console.log('username', process.env.TESTRAILS_USERNAME);
-        console.log('password', process.env.TESTRAILS_PASSWORD);
-        console.log('projectId', process.env.TESTRAILS_PROJECTID);
-        console.log('suiteName', process.env.TESTRAILS_UNIT_SUITENAME);
         var reporterOptions = {
             domain: process.env.TESTRAILS_HOST,
             username: process.env.TESTRAILS_USERNAME,

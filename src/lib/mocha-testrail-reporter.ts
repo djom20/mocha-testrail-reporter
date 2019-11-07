@@ -82,5 +82,4 @@ export class MochaTestRailReporter extends reporters.Spec {
         if (options == null) throw new Error("Missing --reporter-options in mocha.opts");
         if (options[name] == null) throw new Error(`Missing ${name} value. Please update --reporter-options in mocha.opts`);
     }
-
 }
